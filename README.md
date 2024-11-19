@@ -1,15 +1,9 @@
 # dinglestream
 
-To install dependencies:
+Designed and developed by [Luqman](https://theluqmn.github.io)
 
-```bash
-bun install
-```
+Financial management system backend, designed to be performant and easily integrated with any projects where financial management is required. Create accounts, transfer funds, view transactions, and more.
 
-To run:
-
-```bash
-bun run index.js
-```
-
-This project was created using `bun init` in bun v1.1.34. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- Language: JavaScript
+- Runtime: [Bun](https://bun.sh)
+- Database: SQLite
