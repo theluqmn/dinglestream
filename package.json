@@ -1,7 +1,10 @@
 {
   "name": "dinglestream",
-  "module": "index.js",
+  "module": "src/index.js",
   "type": "module",
+  "scripts": {
+    "start": "bun run src/index.js"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
