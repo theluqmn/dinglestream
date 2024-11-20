@@ -5,16 +5,16 @@ export function AccountGet(id) {
 
     const account = db.query("SELECT * FROM accounts WHERE id = ?").get(id)
     if (!account) {
-        return null, false
+        return [null, false]
     }
 
-    return account, true
+    return [account, true]
 }
 
 export function AccountCreate(account) {
     const db = InitialiseDB("database/accounts.sqlite")
 
-    const [account, check] = AccountGet(account.id)
+    const [_, check] = AccountGet(account.id)
     if (check) {
         console.log(`Account ${account.username} already exists`)
         return
@@ -28,7 +28,7 @@ export function AccountCreate(account) {
 export function AccountUpdate(account) {
     const db = InitialiseDB("database/accounts.sqlite")
 
-    const [account, check] = AccountGet(account.id)
+    const [_, check] = AccountGet(account.id)
     if (!check) {
         console.log(`Account ${account.username} does not exist`)
         return
