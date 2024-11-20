@@ -1,12 +1,20 @@
 import { AccountCreate, AccountDelete } from "./functions/accounts";
+import { TransactionNew } from "./functions/transactions";
 
 console.log("dinglestream");
 
 AccountCreate({
     id: "1",
-    username: "dinglestream",
+    username: "dingle",
     firstname: "Dingle",
-    lastname: "Stream"
-})
+    lastname: "Dangle",
+});
 
-AccountDelete("1")
+AccountCreate({
+    id: "2",
+    username: "dingle2",
+    firstname: "Dingle",
+    lastname: "Dangle",
+});
+
+TransactionNew("1", "2", 10, "test");

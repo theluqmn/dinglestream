@@ -23,7 +23,7 @@ export function AccountCreate(account) {
     const create_acc = db.query("INSERT INTO accounts (id, username, firstname, lastname) VALUES (?, ?, ?, ?)")
     const create_bal = db.query("INSERT INTO balances (id, balance) VALUES (?, ?)")
     create_acc.run(account.id, account.username, account.firstname, account.lastname)
-    create_bal.run(account.id, 0)
+    create_bal.run(account.id, 10)
 
     console.log(`Created account ${account.username}`)
 }
@@ -38,9 +38,7 @@ export function AccountUpdate(account) {
     }
 
     const update_acc = db.query("UPDATE accounts SET username = ?, firstname = ?, lastname = ? WHERE id = ?")
-    const update_bal = db.query("UPDATE balances SET balance = ? WHERE id = ?")
     update_acc.run(account.username, account.firstname, account.lastname, account.id)
-    update_bal.run(account.balance, account.id)
 
     console.log(`Updated account ${account.username}`)
 }
