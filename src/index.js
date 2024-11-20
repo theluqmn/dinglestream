@@ -18,3 +18,5 @@ AccountCreate({
 });
 
 TransactionNew("1", "2", 10, "test");
+
+AccountDelete("1");
