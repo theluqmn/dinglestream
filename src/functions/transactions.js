@@ -14,7 +14,7 @@ export function TransactionNew(sender, receiver, amount, description) {
     if (sender_account.balance < amount) { console.log(`Account ${sender} does not have enough funds`); return }
     if (amount < 0) { console.log(`Amount cannot be negative`); return }
     if (amount == 0) { console.log(`Amount cannot be 0`); return }
-    if (!description) { description = "Not provided"; return }
+    if (!description) { description = "Not provided" }
     
     const sender_bal = account.query("UPDATE balances SET balance = balance - ? WHERE id = ?")
     const receiver_bal = account.query("UPDATE balances SET balance = balance + ? WHERE id = ?")
@@ -25,6 +25,22 @@ export function TransactionNew(sender, receiver, amount, description) {
     transaction_rec.run(crypto.randomUUID(), sender, receiver, amount, description)
 
     console.log(`Transferred ${amount} from '${sender}' to '${receiver}'`)
+}
+
+export function TransactionsGet(id) {
+    const transaction = TransactionDB()
+    const transactions = transaction.query("SELECT * FROM transactions WHERE sender = ? OR receiver = ?").all(id, id)
+    
+    if (transactions.length == 0) {
+        console.log(`No transactions found for ${id}`)
+        return
+    }
+
+    console.log(`Transactions for ${id}:`)
+    for (const transaction of transactions) {
+        console.log(`${transaction.id} - ${transaction.sender} -> ${transaction.receiver} (${transaction.amount}) - ${transaction.description}`)
+    }
+    return transactions
 }
 
 function AccountDB() {
@@ -39,3 +55,5 @@ function TransactionDB() {
     db.run("CREATE TABLE IF NOT EXISTS transactions (id TEXT PRIMARY KEY, sender TEXT, receiver TEXT, amount INTEGER, description TEXT)")
     return db
 }
+
+TransactionsGet("2")
