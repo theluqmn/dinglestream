@@ -1,7 +1,7 @@
 import { Database } from "bun:sqlite"
 
 export function AccountGet(id) {
-    const db = InitialiseDB()
+    const db = AccountDB()
 
     const account = db.query("SELECT * FROM accounts WHERE id = ?").get(id)
     if (!account) {
@@ -12,7 +12,7 @@ export function AccountGet(id) {
 }
 
 export function AccountCreate(account) {
-    const db = InitialiseDB()
+    const db = AccountDB()
 
     const [_, check] = AccountGet(account.id)
     if (check) {
@@ -29,7 +29,7 @@ export function AccountCreate(account) {
 }
 
 export function AccountUpdate(account) {
-    const db = InitialiseDB()
+    const db = AccountDB()
 
     const [_, check] = AccountGet(account.id)
     if (!check) {
@@ -44,7 +44,7 @@ export function AccountUpdate(account) {
 }
 
 export function AccountDelete(id) {
-    const db = InitialiseDB()
+    const db = AccountDB()
 
     const [account, check] = AccountGet(id)
     if (!check) {
@@ -60,7 +60,7 @@ export function AccountDelete(id) {
     console.log(`Deleted account ${account.username}`)
 }
 
-function InitialiseDB() {
+function AccountDB() {
     const db = new Database("database/accounts.sqlite")
 
     const init_account = db.query("CREATE TABLE IF NOT EXISTS accounts (id TEXT PRIMARY KEY, username TEXT, firstname TEXT, lastname TEXT)")

@@ -12,5 +12,3 @@ function GetTime() {
 export function LogInfo(message) {
     console.log(`[${GetTime()}][INFO] ${message}`)
 }
-
-console.log(LogInfo("test"))
